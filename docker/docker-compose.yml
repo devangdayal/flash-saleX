@@ -1,0 +1,118 @@
+version: "3.8"
+
+services:
+  # --- SQL Database STACK ---
+  postgres:
+    image: postgres:16-alpine
+    container_name: flash-sale-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: flash_sale_db
+      TZ: Asia/Kolkata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d flash_sale_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - flash-sale-network
+
+  # --- Redis Database STACK ---
+  redis:
+    image: redis:7-alpine
+    container_name: flash-sale-redis
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - yes
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redisdata:/data
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - flash-sale-network
+
+  # --- MESSAGING STACK (Apache Kafka) ---
+  kafka:
+    image: apache/kafka:3.9.1
+    container_name: flash-sale-kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+
+    networks:
+      - flash-sale-network
+
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+      KAFKA_LOG_DIRS: /var/lib/kafka/data/kraft-combined-logs
+
+      KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1 || exit 1",
+        ]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+  # KAFKA UI
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: flash-sale-kafka-ui
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: flash-sale-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+
+    networks:
+      - flash-sale-network
+
+
+# Networks and Volumes
+networks:
+  flash-sale-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  redisdata:
+  kafkadata:
