@@ -1,0 +1,67 @@
+# ==========================================
+# System & OS Files
+# ==========================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# ==========================================
+# Environment / Secrets
+# ==========================================
+.env
+**/.env
+*.local
+
+# ==========================================
+# Java / Maven (Nested Module Aware)
+# ==========================================
+**/target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+
+# Ignore local maven wrapper executables in nested folders
+**/mvnw
+**/mvnw.cmd
+
+# ==========================================
+# IntelliJ IDEA
+# ==========================================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# ==========================================
+# VS Code
+# ==========================================
+.vscode/
+*.code-workspace
+
+# ==========================================
+# STS / Eclipse / NetBeans
+# ==========================================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+**/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================================
+# Local Log Files
+# ==========================================
+*.log
+logs/
+**/logs/
