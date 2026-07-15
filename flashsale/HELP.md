@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.flashsalex.flash-sale' is invalid and this project uses 'com.flashsalex.flash_sale' instead.
-
 # Getting Started
 
 ### Reference Documentation
@@ -17,7 +12,6 @@ For further reference, please consider the following sections:
 * [Spring Security](https://docs.spring.io/spring-boot/4.1.0/reference/web/spring-security.html)
 * [OAuth2 Resource Server](https://docs.spring.io/spring-boot/4.1.0/reference/web/spring-security.html#web.security.oauth2.server)
 * [Spring Data Redis (Access+Driver)](https://docs.spring.io/spring-boot/4.1.0/reference/data/nosql.html#data.nosql.redis)
-* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/4.1.0/reference/messaging/kafka.html)
 * [Spring Boot Actuator](https://docs.spring.io/spring-boot/4.1.0/reference/actuator/index.html)
 * [Flyway Migration](https://docs.spring.io/spring-boot/4.1.0/how-to/data-initialization.html#howto.data-initialization.migration-tool.flyway)
 * [Spring Configuration Processor](https://docs.spring.io/spring-boot/4.1.0/specification/configuration-metadata/annotation-processor.html)

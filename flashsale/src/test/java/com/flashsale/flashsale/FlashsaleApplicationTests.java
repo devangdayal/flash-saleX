@@ -1,10 +1,10 @@
-package com.flashsalex.flash_sale;
+package com.flashsale.flashsale;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FlashSaleApplicationTests {
+class FlashsaleApplicationTests {
 
 	@Test
 	void contextLoads() {

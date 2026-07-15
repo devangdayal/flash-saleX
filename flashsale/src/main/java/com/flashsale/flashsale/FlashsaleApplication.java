@@ -1,13 +1,13 @@
-package com.flashsalex.flash_sale;
+package com.flashsale.flashsale;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FlashSaleApplication {
+public class FlashsaleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlashSaleApplication.class, args);
+		SpringApplication.run(FlashsaleApplication.class, args);
 	}
 
 }
