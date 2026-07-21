@@ -49,7 +49,7 @@ public class User {
     private UserRole role;
 
     @Column(nullable = false)
-    private String enabled;
+    private boolean enabled;
 
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified;
