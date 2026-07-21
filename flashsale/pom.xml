@@ -8,8 +8,8 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.flashsale</groupId>
-	<artifactId>flashsale</artifactId>
+	<groupId>com.devangdayal</groupId>
+	<artifactId>devangdayal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

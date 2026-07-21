@@ -5,10 +5,10 @@ CREATE TABLE
         description TEXT,
         price NUMERIC(12, 2) NOT NULL,
         status VARCHAR(30) NOT NULL,
-        created_at TIMESTAMP NOT NULL DEFAULT NOW (),
-        updated_at TIMESTAMP NOT NULL DEFAULT NOW ()
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 
 CREATE INDEX idx_product_name ON product (name);
 
-CREATE INDEX idx_product_id ON product (id);
+CREATE INDEX idx_product_status ON product (status);

@@ -10,6 +10,7 @@
     - List Tables: `\dt`
     - List Indexes: `\di`
     - Describe the Table : `\d <table_name>`
+    - Delete 
 
 ## URLs
 
