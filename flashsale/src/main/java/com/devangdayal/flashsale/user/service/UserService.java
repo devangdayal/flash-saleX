@@ -11,10 +11,6 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElse(null);
     }
@@ -23,16 +19,4 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User updateUser(Long userId, User updatedUser) {
-        User existingUser = userRepository.findById(userId).orElse(null);
-        if (existingUser != null) {
-            existingUser.setName(updatedUser.getName());
-            existingUser.setEmail(updatedUser.getEmail());
-            existingUser.setRole(updatedUser.getRole());
-            existingUser.setEnabled(updatedUser.getEnabled());
-            existingUser.setEmailVerified(updatedUser.isEmailVerified());
-            return userRepository.save(existingUser);
-        }
-        return null;
-    }
 }
