@@ -1,5 +1,5 @@
 package com.devangdayal.flashsale.config;
 
-public class Constants {
+public class GlobalExceptionHandler {
     
 }
