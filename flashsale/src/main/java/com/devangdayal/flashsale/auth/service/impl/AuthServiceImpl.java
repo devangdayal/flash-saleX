@@ -5,14 +5,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.devangdayal.flashsale.user.entity.User;
+import com.devangdayal.flashsale.user.mapper.UserMapper;
 import com.devangdayal.flashsale.auth.dto.AuthResponse;
 import com.devangdayal.flashsale.auth.dto.LoginRequest;
 import com.devangdayal.flashsale.auth.dto.RefreshTokenRequest;
 import com.devangdayal.flashsale.auth.dto.RegisterRequest;
 import com.devangdayal.flashsale.auth.entity.RefreshToken;
-import com.devangdayal.flashsale.auth.mapper.UserMapper;
 import com.devangdayal.flashsale.auth.service.AuthService;
 import com.devangdayal.flashsale.auth.service.JwtService;
+import com.devangdayal.flashsale.auth.service.RefreshTokenService;
 import com.devangdayal.flashsale.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -45,9 +46,9 @@ public class AuthServiceImpl implements AuthService {
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
-                .refreshToken(refreshToken)
+                .refreshToken(refreshToken.getToken())
                 .tokenType("Bearer")
-                .expiresIn(jwt.getExpirationTime())
+                .expiresIn(jwtService.getExpirationTime())
                 .build();
 
     }

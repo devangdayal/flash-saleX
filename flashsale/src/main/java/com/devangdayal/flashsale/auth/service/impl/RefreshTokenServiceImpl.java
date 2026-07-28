@@ -1,13 +1,10 @@
 package com.devangdayal.flashsale.auth.service.impl;
 
-import java.time.Duration;
-import java.time.Instant;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.devangdayal.flashsale.auth.entity.RefreshToken;
 import com.devangdayal.flashsale.auth.repository.RefreshTokenRepository;
 import com.devangdayal.flashsale.auth.service.RefreshTokenService;
@@ -32,7 +29,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService{
         RefreshToken refreshToken = RefreshToken.builder()
                 .user(user)
                 .token(UUID.randomUUID().toString())
-                .expiresAt(LocalDateTime.now().plus(Duration.ofMillis(refreshExpiration)))
+                .expiresAt(LocalDateTime.now().plusDays(7))
                 .revoked(false)
                 .build();
 

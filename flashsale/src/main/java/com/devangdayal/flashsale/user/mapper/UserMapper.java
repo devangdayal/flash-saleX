@@ -1,4 +1,6 @@
-package com.devangdayal.flashsale.auth.mapper;
+package com.devangdayal.flashsale.user.mapper;
+
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 import com.devangdayal.flashsale.user.entity.User;
@@ -17,6 +19,9 @@ public class UserMapper {
         .password(request.getPassword())
         .role(UserRole.USER)
         .enabled(true)
+        .emailVerified(false)
+        .createdAt(LocalDateTime.now())
+        .updatedAt(LocalDateTime.now())
         .build();
     }
 

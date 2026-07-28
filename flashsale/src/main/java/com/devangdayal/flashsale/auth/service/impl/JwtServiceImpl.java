@@ -5,7 +5,6 @@ import com.devangdayal.flashsale.auth.service.JwtService;
 import com.devangdayal.flashsale.user.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
