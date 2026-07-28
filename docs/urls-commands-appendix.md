@@ -2,6 +2,9 @@
 
 ## Commands
 
+
+- Shows Line changes and other
+  - `git log --since="today" --stat`
 - Spring boot run : mvn spring-boot:run
 - Connecting to PostgreSQL - docker exec -it flash-sale-postgres psql -U postgres
   - Commonly used:

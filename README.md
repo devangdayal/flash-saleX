@@ -1,3 +1,5 @@
+# Flash Sale X
+
 
 
 ## Directory Meaning
@@ -10,14 +12,14 @@
 3. Mapper
     - Converts one object into another
 4. Entity
-    - Represents the database tables   
+    - Represents the database tables
 5. Repository
     - Only responsible for database access
 6. DTO (Data Transfer Object)
     - Objects used only for communications
 
-
 ## Target Code Structure
+
 ```
 com.flashsalex
 ├── FlashSaleApplication.java
