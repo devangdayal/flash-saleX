@@ -9,10 +9,10 @@ import com.devangdayal.flashsale.auth.dto.AuthResponse;
 import com.devangdayal.flashsale.auth.dto.LoginRequest;
 import com.devangdayal.flashsale.auth.dto.RefreshTokenRequest;
 import com.devangdayal.flashsale.auth.dto.RegisterRequest;
+import com.devangdayal.flashsale.auth.entity.RefreshToken;
 import com.devangdayal.flashsale.auth.mapper.UserMapper;
 import com.devangdayal.flashsale.auth.service.AuthService;
 import com.devangdayal.flashsale.auth.service.JwtService;
-import com.devangdayal.flashsale.security.entity.RefreshToken;
 import com.devangdayal.flashsale.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;

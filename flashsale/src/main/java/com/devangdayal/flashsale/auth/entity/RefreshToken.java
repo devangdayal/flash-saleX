@@ -1,4 +1,4 @@
-package com.devangdayal.flashsale.security.entity;
+package com.devangdayal.flashsale.auth.entity;
 import com.devangdayal.flashsale.user.entity.User;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,7 +1,8 @@
 package com.devangdayal.flashsale.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.devangdayal.flashsale.security.entity.RefreshToken;
+
+import com.devangdayal.flashsale.auth.entity.RefreshToken;
 import com.devangdayal.flashsale.user.entity.User;
 import java.util.Optional;
 
