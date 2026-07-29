@@ -10,6 +10,7 @@ import com.devangdayal.flashsale.auth.repository.RefreshTokenRepository;
 import com.devangdayal.flashsale.auth.service.RefreshTokenService;
 import com.devangdayal.flashsale.user.entity.User;
 
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,6 +23,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService{
     private long refreshExpiration;
 
     @Override
+    @Transactional
     public RefreshToken createRefreshToken(User user) {
 
         refreshTokenRepository.deleteByUser(user);
@@ -38,6 +40,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService{
     }
 
     @Override
+    @Transactional
     public RefreshToken verifyRefreshToken(String token) {
 
         

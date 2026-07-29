@@ -4,6 +4,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.devangdayal.flashsale.user.entity.User;
 import com.devangdayal.flashsale.user.mapper.UserMapper;
 import com.devangdayal.flashsale.auth.dto.AuthResponse;
@@ -76,6 +78,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public AuthResponse refreshToken(RefreshTokenRequest request) {
 
         RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(request.getRefreshToken());
