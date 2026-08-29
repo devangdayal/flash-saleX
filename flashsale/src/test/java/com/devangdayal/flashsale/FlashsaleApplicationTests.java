@@ -1,4 +1,4 @@
-package com.flashsale.flashsale;
+package com.devangdayal.flashsale;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

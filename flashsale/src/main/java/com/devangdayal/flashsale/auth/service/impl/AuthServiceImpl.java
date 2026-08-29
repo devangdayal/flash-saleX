@@ -6,8 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devangdayal.flashsale.user.entity.User;
-import com.devangdayal.flashsale.user.mapper.UserMapper;
 import com.devangdayal.flashsale.auth.dto.AuthResponse;
 import com.devangdayal.flashsale.auth.dto.LoginRequest;
 import com.devangdayal.flashsale.auth.dto.RefreshTokenRequest;
@@ -16,6 +14,10 @@ import com.devangdayal.flashsale.auth.entity.RefreshToken;
 import com.devangdayal.flashsale.auth.service.AuthService;
 import com.devangdayal.flashsale.auth.service.JwtService;
 import com.devangdayal.flashsale.auth.service.RefreshTokenService;
+import com.devangdayal.flashsale.common.exception.EmailAlreadyExistsException;
+import com.devangdayal.flashsale.common.exception.UserNotFoundException;
+import com.devangdayal.flashsale.user.entity.User;
+import com.devangdayal.flashsale.user.mapper.UserMapper;
 import com.devangdayal.flashsale.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse register(RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exist");
+            throw new EmailAlreadyExistsException();
         }
 
         User user = userMapper.toEntity(request);
@@ -62,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
                 .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(UserNotFoundException::new);
 
         String accessToken = jwtService.generateToken(user);
 
