@@ -1,3 +1,5 @@
+![FlashSaleXBanner](flashsalex.svg)
+
 # FlashSaleX
 
 A production-grade backend system simulating an e-commerce flash sale platform — built to handle extreme traffic spikes (e.g. 1,000,000 requests against 100 units of inventory) without overselling, while staying observable, fault-tolerant, and horizontally scalable.
@@ -21,16 +23,16 @@ During a flash sale, millions of users attempt to purchase a limited number of u
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Language / Framework | Java 21, Spring Boot 4 |
-| Security | Spring Security, JWT (JJWT) |
-| Persistence | PostgreSQL, Spring Data JPA, Flyway |
-| Caching | Redis |
-| Messaging | Kafka |
-| Deployment | Docker, Docker Compose |
-| Monitoring (planned) | Micrometer, Prometheus, Grafana |
-| Testing (planned) | JUnit, Testcontainers, k6, JMeter |
+| Layer                | Technology                          |
+| -------------------- | ----------------------------------- |
+| Language / Framework | Java 21, Spring Boot 4              |
+| Security             | Spring Security, JWT (JJWT)         |
+| Persistence          | PostgreSQL, Spring Data JPA, Flyway |
+| Caching              | Redis                               |
+| Messaging            | Kafka                               |
+| Deployment           | Docker, Docker Compose              |
+| Monitoring (planned) | Micrometer, Prometheus, Grafana     |
+| Testing (planned)    | JUnit, Testcontainers, k6, JMeter   |
 
 ---
 
@@ -66,6 +68,7 @@ com.devangdayal.flashsale
 ```
 
 **Layering rules:**
+
 - **Controller** — exposes REST APIs, no business logic
 - **Service** — owns all business logic
 - **Mapper** — converts entities ↔ DTOs
@@ -85,8 +88,9 @@ Managed via Flyway migrations (`V1`–`V4`):
 - `orders`
 
 **Relationships**
-- `User` 1—* `Order`
-- `Order` *—1 `User`, *—1 `Product`
+
+- `User` 1—\* `Order`
+- `Order` _—1 `User`, _—1 `Product`
 - `Product` 1—1 `Inventory` (shared primary key via `@MapsId`)
 - `Inventory` uses **optimistic locking** (`@Version`) to prevent overselling under concurrent writes
 
@@ -121,23 +125,24 @@ Managed via Flyway migrations (`V1`–`V4`):
 
 ## Roadmap
 
-| Phase | Scope |
-|---|---|
-| 1 | Authentication — register, login, JWT, refresh tokens, RBAC |
-| 2 | Product APIs — create, update, list |
-| 3 | Inventory — reserve/release with optimistic locking |
-| 4 | Flash Sale core — purchase flow, reservation, oversell prevention |
-| 5 | Redis — product & inventory caching |
-| 6 | Kafka — order/payment/notification events |
-| 7 | Performance — indexing, query tuning, connection pooling |
-| 8 | Production readiness — health checks, metrics, structured logging, exception handling |
-| 9 | Load testing — k6, JMeter, targeting 1M simulated concurrent users |
+| Phase | Scope                                                                                 |
+| ----- | ------------------------------------------------------------------------------------- |
+| 1     | Authentication — register, login, JWT, refresh tokens, RBAC                           |
+| 2     | Product APIs — create, update, list                                                   |
+| 3     | Inventory — reserve/release with optimistic locking                                   |
+| 4     | Flash Sale core — purchase flow, reservation, oversell prevention                     |
+| 5     | Redis — product & inventory caching                                                   |
+| 6     | Kafka — order/payment/notification events                                             |
+| 7     | Performance — indexing, query tuning, connection pooling                              |
+| 8     | Production readiness — health checks, metrics, structured logging, exception handling |
+| 9     | Load testing — k6, JMeter, targeting 1M simulated concurrent users                    |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - Java 21
 - Maven (or the included wrapper, `./mvnw`)
 - PostgreSQL, Redis, Kafka (or run via `docker/docker-compose.yml`)
@@ -178,6 +183,7 @@ docker compose -f docker/docker-compose.yml up
 ## Docs
 
 Further design detail lives under [`docs/`](./docs):
+
 - [`architecture.md`](./docs/architecture.md)
 - [`system-design.md`](./docs/system-design.md)
 - [`capacity-planning.md`](./docs/capacity-planning.md)

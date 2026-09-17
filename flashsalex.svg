@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+    <defs>
+        <!-- Background Gradient -->
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0f172a" />
+            <stop offset="50%" stop-color="#1e1b4b" />
+            <stop offset="100%" stop-color="#09090b" />
+        </linearGradient>
+
+        <!-- Accent Glow Gradient -->
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f43f5e" />
+            <stop offset="50%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#3b82f6" />
+        </linearGradient>
+
+        <!-- Grid Pattern for Tech Vibe -->
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.03" />
+        </pattern>
+
+        <!-- Drop Shadow for Text -->
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="15" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="400" fill="url(#bgGrad)" />
+    <rect width="1200" height="400" fill="url(#grid)" />
+
+    <!-- Decorative Glowing Orbs/Lights -->
+    <circle cx="1050" cy="80" r="180" fill="#f43f5e" opacity="0.15" filter="blur(60px)" />
+    <circle cx="150" cy="320" r="200" fill="#3b82f6" opacity="0.15" filter="blur(60px)" />
+
+    <!-- Central Content Container -->
+    <g transform="translate(100, 110)">
+
+        <!-- Top Subtitle Badge -->
+        <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="195" height="32" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+            <circle cx="16" cy="16" r="5" fill="#f43f5e" />
+            <text x="32" y="21" fill="#cbd5e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" letter-spacing="1">HIGH-CONCURRENCY</text>
+        </g>
+
+        <!-- Main Title -->
+        <text x="0" y="95" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="800" letter-spacing="-1">
+      Flash Sale Engine
+        </text>
+
+        <!-- Gradient Subtitle / Tagline -->
+        <text x="0" y="145" fill="url(#accentGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="700" letter-spacing="0.5">
+      Zero Overselling • Virtual Threads • Robust Concurrency
+        </text>
+
+        <!-- Tech Stack Badges / Pills -->
+        <g transform="translate(0, 185)">
+            <!-- Badge 1: Spring Boot -->
+            <rect x="0" y="0" width="115" height="30" rx="6" fill="#0f172a" stroke="#059669" stroke-width="1.5" />
+            <text x="58" y="20" fill="#34d399" font-family="monospace" font-size="12" font-weight="600" text-anchor="middle">Spring Boot</text>
+
+            <!-- Badge 2: PostgreSQL -->
+            <rect x="130" y="0" width="115" height="30" rx="6" fill="#0f172a" stroke="#2563eb" stroke-width="1.5" />
+            <text x="188" y="20" fill="#60a5fa" font-family="monospace" font-size="12" font-weight="600" text-anchor="middle">PostgreSQL</text>
+
+            <!-- Badge 3: Virtual Threads -->
+            <rect x="260" y="0" width="135" height="30" rx="6" fill="#0f172a" stroke="#7c3aed" stroke-width="1.5" />
+            <text x="327" y="20" fill="#a78bfa" font-family="monospace" font-size="12" font-weight="600" text-anchor="middle">Virtual Threads</text>
+        </g>
+
+    </g>
+
+    <!-- Right Side Visual Accent (Lightning Icon / Abstract Lock) -->
+    <g transform="translate(920, 130)" opacity="0.9">
+        <path d="M45 0L0 55H35L25 110L80 45H45L55 0H45Z" fill="url(#accentGrad)" filter="url(#glow)" />
+    </g>
+</svg>
