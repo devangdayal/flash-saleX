@@ -19,6 +19,7 @@ import com.devangdayal.flashsale.common.exception.RefreshTokenExpiredException;
 import com.devangdayal.flashsale.common.exception.RefreshTokenNotFoundException;
 import com.devangdayal.flashsale.common.exception.RefreshTokenRevokedException;
 import com.devangdayal.flashsale.common.exception.UserNotFoundException;
+import com.devangdayal.flashsale.common.exception.inventory.InsufficientInventoryException;
 import com.devangdayal.flashsale.common.response.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,141 +27,152 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+        private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleEmailAlreadyExists(
-            EmailAlreadyExistsException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(EmailAlreadyExistsException.class)
+        public ResponseEntity<ErrorResponse> handleEmailAlreadyExists(
+                        EmailAlreadyExistsException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.CONFLICT,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.CONFLICT,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(InvalidCredentialsException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidCredentials(
-            InvalidCredentialsException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(InvalidCredentialsException.class)
+        public ResponseEntity<ErrorResponse> handleInvalidCredentials(
+                        InvalidCredentialsException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.UNAUTHORIZED,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.UNAUTHORIZED,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleUserNotFound(
-            UserNotFoundException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(UserNotFoundException.class)
+        public ResponseEntity<ErrorResponse> handleUserNotFound(
+                        UserNotFoundException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.NOT_FOUND,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.NOT_FOUND,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(RefreshTokenNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleRefreshTokenNotFound(
-            RefreshTokenNotFoundException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(RefreshTokenNotFoundException.class)
+        public ResponseEntity<ErrorResponse> handleRefreshTokenNotFound(
+                        RefreshTokenNotFoundException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.NOT_FOUND,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.NOT_FOUND,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(RefreshTokenExpiredException.class)
-    public ResponseEntity<ErrorResponse> handleRefreshTokenExpired(
-            RefreshTokenExpiredException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(RefreshTokenExpiredException.class)
+        public ResponseEntity<ErrorResponse> handleRefreshTokenExpired(
+                        RefreshTokenExpiredException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.UNAUTHORIZED,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.UNAUTHORIZED,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(RefreshTokenRevokedException.class)
-    public ResponseEntity<ErrorResponse> handleRefreshTokenRevoked(
-            RefreshTokenRevokedException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(RefreshTokenRevokedException.class)
+        public ResponseEntity<ErrorResponse> handleRefreshTokenRevoked(
+                        RefreshTokenRevokedException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.UNAUTHORIZED,
-                ex.getMessage(),
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.UNAUTHORIZED,
+                                ex.getMessage(),
+                                request);
+        }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidation(
-            MethodArgumentNotValidException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<ErrorResponse> handleValidation(
+                        MethodArgumentNotValidException ex,
+                        HttpServletRequest request) {
 
-        Map<String, String> fieldErrors = new LinkedHashMap<>();
+                Map<String, String> fieldErrors = new LinkedHashMap<>();
 
-        ex.getBindingResult()
-                .getFieldErrors()
-                .forEach(error -> fieldErrors.putIfAbsent(
-                        error.getField(),
-                        error.getDefaultMessage()));
+                ex.getBindingResult()
+                                .getFieldErrors()
+                                .forEach(error -> fieldErrors.putIfAbsent(
+                                                error.getField(),
+                                                error.getDefaultMessage()));
 
-        ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("Validation failed")
-                .path(request.getRequestURI())
-                .fieldErrors(fieldErrors)
-                .build();
+                ErrorResponse response = ErrorResponse.builder()
+                                .timestamp(LocalDateTime.now())
+                                .status(HttpStatus.BAD_REQUEST.value())
+                                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                                .message("Validation failed")
+                                .path(request.getRequestURI())
+                                .fieldErrors(fieldErrors)
+                                .build();
 
-        return ResponseEntity.badRequest().body(response);
-    }
+                return ResponseEntity.badRequest().body(response);
+        }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErrorResponse> handleAuthenticationException(
-            AuthenticationException ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(AuthenticationException.class)
+        public ResponseEntity<ErrorResponse> handleAuthenticationException(
+                        AuthenticationException ex,
+                        HttpServletRequest request) {
 
-        return buildResponse(
-                HttpStatus.UNAUTHORIZED,
-                "Invalid email or password",
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.UNAUTHORIZED,
+                                "Invalid email or password",
+                                request);
+        }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(
-            Exception ex,
-            HttpServletRequest request) {
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ErrorResponse> handleException(
+                        Exception ex,
+                        HttpServletRequest request) {
 
-        log.error(
-                "Unhandled exception while processing {}",
-                request.getRequestURI(),
-                ex);
+                log.error(
+                                "Unhandled exception while processing {}",
+                                request.getRequestURI(),
+                                ex);
 
-        return buildResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                "An unexpected error occurred",
-                request);
-    }
+                return buildResponse(
+                                HttpStatus.INTERNAL_SERVER_ERROR,
+                                "An unexpected error occurred",
+                                request);
+        }
 
-    private ResponseEntity<ErrorResponse> buildResponse(
-            HttpStatus status,
-            String message,
-            HttpServletRequest request) {
+        private ResponseEntity<ErrorResponse> buildResponse(
+                        HttpStatus status,
+                        String message,
+                        HttpServletRequest request) {
 
-        ErrorResponse response = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(status.value())
-                .error(status.getReasonPhrase())
-                .message(message)
-                .path(request.getRequestURI())
-                .build();
+                ErrorResponse response = ErrorResponse.builder()
+                                .timestamp(LocalDateTime.now())
+                                .status(status.value())
+                                .error(status.getReasonPhrase())
+                                .message(message)
+                                .path(request.getRequestURI())
+                                .build();
 
-        return ResponseEntity
-                .status(status)
-                .body(response);
-    }
+                return ResponseEntity
+                                .status(status)
+                                .body(response);
+        }
+
+        @ExceptionHandler(InsufficientInventoryException.class)
+        public ResponseEntity<ErrorResponse> handleInsufficientInventory(
+                        InsufficientInventoryException ex,
+                        HttpServletRequest request) {
+                return buildResponse(
+                                HttpStatus.CONFLICT,
+                                ex.getMessage(),
+                                request);
+
+        }
 }
