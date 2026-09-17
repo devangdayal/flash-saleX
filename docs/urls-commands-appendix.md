@@ -2,6 +2,7 @@
 
 ## Commands
 
+- To test the single test file: mvn -Dtest=AuthSecurityIntegrationTest test
 - mvn spring-boot:run
 - Shows Line changes and other
   - `git log --since="today" --stat`
@@ -13,7 +14,7 @@
     - List Tables: `\dt`
     - List Indexes: `\di`
     - Describe the Table : `\d <table_name>`
-    - Delete 
+    - Delete
 
 ## URLs
 
@@ -44,4 +45,4 @@
 }
 ```
 
-- Check the Info about Endpoints - http://localhost:8080/actuator/info 
+- Check the Info about Endpoints - http://localhost:8080/actuator/info
