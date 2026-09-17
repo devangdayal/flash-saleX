@@ -2,7 +2,7 @@
 
 ## Commands
 
-
+- mvn spring-boot:run
 - Shows Line changes and other
   - `git log --since="today" --stat`
 - Spring boot run : mvn spring-boot:run
